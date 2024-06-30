@@ -2,7 +2,10 @@ import joi from "joi"
 
 const Register=joi.object({
     email:joi.string().email().required(),
-    password:joi.string().min(8).max(16).required()
+    name:joi.string().min(2).max(16).required(),
+    phone:joi.string().pattern(/^[0-9]{10}$/).required(),
+    password:joi.string().min(8).max(16).required(),
+   
 })
 
 export const validateRegistration=(req,res,next)=>{

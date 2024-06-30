@@ -6,6 +6,11 @@ const UserDataSchema=new mongoose.Schema({
         required:true,
         unique:true
     },
+    name:{
+        type:String,
+        required:true,
+    },
+    phone:Number,
     password:String,
     expiryDate:Date,
     forgetOtp:String,
