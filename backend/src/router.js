@@ -8,9 +8,9 @@ const router=express.Router()
 
 router.post('/register',validateRegistration,AuthCtrl.register)
 router.post('/login',validateLogin,AuthCtrl.login)
-router.get('/getAll',AuthCtrl.getAllData)
-router.post("/resetPass",AuthCtrl.resetPass)
-router.post("/setPass",setNewPass,AuthCtrl.setNewPass)
+router.get('/all-users',AuthCtrl.getAllData)
+router.post("/reset-pass",AuthCtrl.resetPass)
+router.post("/set-pass",setNewPass,AuthCtrl.setNewPass)
 
 
 router.put('/update/:id',loginCheck,AuthCtrl.updateUser)

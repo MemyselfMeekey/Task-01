@@ -84,7 +84,7 @@ class AuthController {
                 result: {
                     accessToken: accessToken,
                     refreshToken: refreshToken,
-                    userDetail: user.email
+                    userDetail: user
                 },
                 message: "Login Successfull",
                 meta: null
@@ -135,6 +135,7 @@ class AuthController {
             console.log("userDetail", userDetail.email)
             if (update) {
                 await AuthSvc.sendForgetPassEmail({ email: userDetail.email, otp: otp })
+                console.log("otp",otp)
                 res.json({
                     result: updatedUser,
                     message: "Please check your email!",
@@ -153,9 +154,11 @@ class AuthController {
     setNewPass = async (req, res, next) => {
         try {
             const { email, otp, confirmPassword } = req.body
+            
             const userDetail = await AuthSvc.getSingleUserByFilter({
                 email: email
             })
+            console.log(userDetail)
             if (!userDetail) {
                  res.status(404).json({ message: "Email doesn't exists" })
             }
@@ -187,7 +190,7 @@ class AuthController {
             if (!updateUser) {
                 return res.status(404).json({ message: 'User not found' });
             }
-            res.status(200).json({ message: 'User updated successfully', result: updateUser.email });
+            res.status(200).json({ message: 'User updated successfully', result: updateUser });
         }
         catch (exception) {
             console.log(exception)

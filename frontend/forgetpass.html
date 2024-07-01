@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <style>
+        .container {
+            max-width: 500px;
+            margin-top: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center">Forgot Password</h2>
+        <form id="forgetpassForm">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Send OTP</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(() => {
+            $('#forgetpassForm').on('submit', (e) => {
+                e.preventDefault();
+                const email = $('#email').val();
+
+                axios.post('http://localhost:3000/reset-pass', { email })
+                    .then(res => {
+                        alert(res.data.message);
+                        window.location.href = 'setforgetpass.html';
+                    })
+                    .catch(err => {
+                        console.error('Error sending OTP:', err);
+                        alert('Error sending OTP. Please try again.');
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>

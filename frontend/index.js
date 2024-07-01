@@ -1,5 +1,15 @@
 $(document).ready(() => {
-    axios.get('http://localhost:3000/getAll')
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        $('#header-actions').html(`
+            <div class="user-info">
+                <a href="userprofile.html"><i class="fa-solid fa-user"></i></a>
+                <span>${user.name}</span>
+            </div>
+        `);
+    }
+
+    axios.get('http://localhost:3000/all-users')
         .then(res => {
             const users = res.data.result;
             let serialNumber = 1;
@@ -15,9 +25,7 @@ $(document).ready(() => {
 
             $('#userTableBody').html(tableBody);
 
-
-            $('#userTableBody tr').on('click', function(e) {
-            
+            $('#userTableBody tr').on('click', function () {
                 const userName = $(this).data('name');
                 const userEmail = $(this).data('email');
                 const userPhone = $(this).data('phone');
@@ -30,6 +38,6 @@ $(document).ready(() => {
             });
         })
         .catch(err => {
-            console.log('Data couldnot be fetched', err);
+            console.log('Data could not be fetched', err);
         });
 });
