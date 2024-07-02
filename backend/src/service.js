@@ -10,7 +10,8 @@ class AuthServices {
             return await user.save()
         }
         catch (exception) {
-            throw exception
+            console.error("Error in userStore:", exception.message);
+            throw new Error("Error storing user data.");
         }
     }
 
@@ -38,7 +39,8 @@ class AuthServices {
             return response
         }
         catch (exception) {
-            throw exception
+            console.error("Error in sendForgetPassEmail:", exception.message);
+            throw new Error("Error sending password reset email.");
         }
     }
 
@@ -48,7 +50,8 @@ class AuthServices {
             return response
         }
         catch (exception) {
-            throw exception
+            console.error("Error in checkEmail:", exception.message);
+            throw new Error("Error checking email.");
         }
     }
 
@@ -58,7 +61,8 @@ class AuthServices {
             return user
         }
         catch (exception) {
-            throw exception
+            console.error("Error in getSingleUserByFilter:", exception.message);
+            throw new Error("Error retrieving user.");
         }
     }
 
@@ -73,7 +77,8 @@ class AuthServices {
             return response
         }
         catch (exception) {
-            throw exception
+            console.error("Error in updateUser:", exception.message);
+            throw new Error("Error updating user.");
         }
     }
 
@@ -83,7 +88,8 @@ class AuthServices {
             return response
         }
         catch(exception){
-            throw exception
+            console.error("Error in deleteUser:", exception.message);
+            throw new Error("Error deleting user.");
         }
     }
 
